@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ListaSpesa.MainPage">
+
+    <StackLayout Margin="20,40,20,20">
+        <Label Text="Da acquistare" FontSize="Title"
+               HorizontalTextAlignment="Center" TextColor="Blue"/>
+        <Entry x:Name="prodotto"
+               Placeholder="Nome Prodotto" />
+        <Grid MinimumHeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Text="-"
+                    Clicked="OnRemoveClicked"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+            <Entry x:Name="quantita"
+                   Text="0"
+                   HorizontalTextAlignment="Center"
+                   Keyboard="Numeric"
+                   Placeholder="Quantità da acquistare"
+                   Grid.Column="1"
+                   Grid.Row="0"/>
+            <Picker x:Name="picker"
+                    Title="Unità"
+                    TitleColor="Black"
+                    Grid.Column="2"
+                    Grid.Row="0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Chili</x:String>
+                            <x:String>Grammi</x:String>
+                            <x:String>Scatole</x:String>
+                            <x:String>Litri</x:String>
+                            <x:String>Barattoli</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+            </Picker>
+            <Button Text="+"
+                    Clicked="OnAddClicked"
+                    Grid.Column="3"
+                    Grid.Row="0"/>
+        </Grid>
+        <Button Text="Aggiungi alla lista"
+                Clicked="OnButtonClicked" />
+        <ListView x:Name="listView" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nome}"
+                              Detail="{Binding Dettagli}" >
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Cancella"
+                                      Clicked="OnDelete"
+                                      CommandParameter="{Binding .}"
+                                      IsDestructive="True">
+                            </MenuItem>
+                        </TextCell.ContextActions>
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
