@@ -35,7 +35,7 @@ namespace ListaSpesa
             try
             {
                 if (string.IsNullOrWhiteSpace(prodotto.Text))
-                    throw new Exception("Nome vuoto");
+                    throw new Exception("Nome vuoto ");
                 var p = new Prodotto
                 {
                     Nome = prodotto.Text,
